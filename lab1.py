@@ -1,10 +1,11 @@
 #otwarcie pliku i czytanie pierwszej linii
-f = open('dane/data10.txt')
-first_line = f.readline().split(" ")
+f = open('dane/data200.txt')
+first_line = " ".join(f.readline().split())
 
 #przypisanie ilośći zadań i parametrów
-n = int(first_line[0])
-k = int(first_line[1])
+NKfirst_line = first_line.split()
+n = int(NKfirst_line[0])
+k = int(NKfirst_line[1])
 
 #utworzenie tablic dla parametrów
 r = []
@@ -17,7 +18,7 @@ index = []
 
 #podział parametrów
 for x in f:
-    next_lines = x.split(" ")
+    next_lines = x.split()
     r.append(int(next_lines[0]))
     p.append(int(next_lines[1]))
     q.append(int(next_lines[2]))
