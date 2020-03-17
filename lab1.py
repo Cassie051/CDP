@@ -1,5 +1,5 @@
 #otwarcie pliku i czytanie pierwszej linii
-f = open('dane/data200.txt')
+f = open('dane/data100.txt')
 first_line = " ".join(f.readline().split())
 
 #przypisanie ilośći zadań i parametrów
@@ -41,22 +41,20 @@ def calculate(r,p,q):
 #skopiowanie tablicy do pomocniczej
 Rsort = r.copy()
 
+
 #algorytm wyznaczający indexy do sortowania
 Rsort.sort()
 def index_tester():
     for i in range(0,n):
         for j in range(0,n):
             if Rsort[i]==r[j]:
-                index.append(j)
-                continue
-        j+=j
-    i+=i
+                index.insert(i,j)
 
-#algorytm ustalający kolejności w 'p' i 'q'
+#algorytm ustalający kolejności w 'p' i 'q'`    `
 def index_sort():
     for i in range(0,n):
-        Psort.append(int(p[(index[i])]))
-        Qsort.append(int(q[(index[i])]))
+        Psort.insert(i, (p[(index[i])]))
+        Qsort.insert(i, (q[(index[i])]))
 
 
 calculate(r,p,q)
