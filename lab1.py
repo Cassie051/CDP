@@ -1,13 +1,21 @@
+#otwarcie pliku i czytanie pierwszej linii
 f = open('dane/data10.txt')
 first_line = f.readline().split(" ")
 
+#przypisanie ilośći zadań i parametrów
 n = int(first_line[0])
 k = int(first_line[1])
 
+#utworzenie tablic dla parametrów
 r = []
 p = []
 q = []
+Rsort = []
+Psort = []
+Qsort = []
+index = []
 
+#podział parametrów
 for x in f:
     next_lines = x.split(" ")
     r.append(int(next_lines[0]))
@@ -16,7 +24,8 @@ for x in f:
 
 f.close()
 
-def calculate():
+#algorytm optymalizujący
+def calculate(r,p,q):
     s = []
     C = []
     s.insert(0, r[0])
@@ -26,11 +35,30 @@ def calculate():
         s.append(max([r[i], C[i-1]]))
         C.append(s[i]+p[i])
         Cmax = max([Cmax, (C[i]+q[i])])
-    return Cmax
+    print (Cmax)
 
-def sorting():
-        data.append(r)
-        data.append(p)
-        data.append(q)
+#skopiowanie tablicy do pomocniczej
+Rsort = r.copy()
 
-print(calculate())
+#algorytm wyznaczający indexy do sortowania
+Rsort.sort()
+def index_tester():
+    for i in range(0,n):
+        for j in range(0,n):
+            if Rsort[i]==r[j]:
+                index.append(j)
+                continue
+        j+=j
+    i+=i
+
+#algorytm ustalający kolejności w 'p' i 'q'
+def index_sort():
+    for i in range(0,n):
+        Psort.append(int(p[(index[i])]))
+        Qsort.append(int(q[(index[i])]))
+
+
+calculate(r,p,q)
+index_tester()
+index_sort()
+calculate(Rsort,Psort,Qsort)
