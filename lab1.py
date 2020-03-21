@@ -43,8 +43,6 @@ def calculate(rows):
 
 def Rsort(rows):
     rows.sort(key=lambda x: (x.r))
-    for x in range(0, n):
-        print(str(rows[x].r) + " "+ str(rows[x].p) + " "+ str(rows[x].q))
     return (calculate(rows))
 
 def RQsort(rows):
