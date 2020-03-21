@@ -23,6 +23,9 @@ for x in f:
     rows.append(Row(int(next_lines[0]), int(next_lines[1]), int(next_lines[2])))
 f.close()
 
+Rrows = rows.copy()
+RQrows = rows.copy()
+
 #algorytm optymalizujący
 def calculate(rows):
     s = []
@@ -36,11 +39,18 @@ def calculate(rows):
         Cmax = max([Cmax, (C[i]+rows[i].q)])
     print (Cmax)
 
+# Sort def
+
 def Rsort(rows):
-    def custom_sort(t):
-        return t.r
-    rows.sort(key=custom_sort)
+    rows.sort(key=lambda x: (x.r))
+    for x in range(0, n):
+        print(str(rows[x].r) + " "+ str(rows[x].p) + " "+ str(rows[x].q))
+    return (calculate(rows))
+
+def RQsort(rows):
+    rows.sort(key= lambda x: (x.r, x.q))
     return (calculate(rows))
 
 calculate(rows)
-Rsort(rows)
+Rsort(Rrows)
+RQsort(RQrows)
