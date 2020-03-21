@@ -8,58 +8,39 @@ n = int(NKfirst_line[0])
 k = int(NKfirst_line[1])
 
 #utworzenie tablic dla parametrów
-r = []
-p = []
-q = []
-Rsort = []
-Psort = []
-Qsort = []
-index = []
+rows = []
+
+class Row:
+  def __init__(self, r, p, q):
+    self.r = r
+    self.p = p
+    self.q = q
+
 
 #podział parametrów
 for x in f:
     next_lines = x.split()
-    r.append(int(next_lines[0]))
-    p.append(int(next_lines[1]))
-    q.append(int(next_lines[2]))
-
+    rows.append(Row(int(next_lines[0]), int(next_lines[1]), int(next_lines[2])))
 f.close()
 
 #algorytm optymalizujący
-def calculate(r,p,q):
+def calculate(rows):
     s = []
     C = []
-    s.insert(0, r[0])
-    C.insert(0, (s[0] + p[0]))
-    Cmax = C[0] + q[0]
+    s.insert(0, rows[0].r)
+    C.insert(0, (s[0] + rows[0].p))
+    Cmax = C[0] + rows[0].q
     for i in range(1, n):
-        s.append(max([r[i], C[i-1]]))
-        C.append(s[i]+p[i])
-        Cmax = max([Cmax, (C[i]+q[i])])
+        s.append(max([rows[i].r, C[i-1]]))
+        C.append(s[i]+rows[i].p)
+        Cmax = max([Cmax, (C[i]+rows[i].q)])
     print (Cmax)
 
-#skopiowanie tablicy do pomocniczej
-Rsort = r.copy()
+def Rsort(rows):
+    def custom_sort(t):
+        return t.r
+    rows.sort(key=custom_sort)
+    return (calculate(rows))
 
-#algorytm wyznaczający indexy do sortowania
-Rsort.sort()
-def index_tester():
-    for i in range(0,n):
-        for j in range(0,n):
-            if Rsort[i]==r[j]:
-                index.append(j)
-                continue
-        j+=j
-    i+=i
-
-#algorytm ustalający kolejności w 'p' i 'q'
-def index_sort():
-    for i in range(0,n):
-        Psort.append(int(p[(index[i])]))
-        Qsort.append(int(q[(index[i])]))
-
-
-calculate(r,p,q)
-index_tester()
-index_sort()
-calculate(Rsort,Psort,Qsort)
+calculate(rows)
+Rsort(rows)
