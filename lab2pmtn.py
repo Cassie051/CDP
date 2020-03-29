@@ -1,5 +1,5 @@
 from queue import PriorityQueue
-import data, lab1
+import data, lab1, sys
 
 Srows = data.rows
 
@@ -39,4 +39,45 @@ def schragePmtn(rows):
     return Cmax
 
 print("Normal SchragePmtn calculate:", schragePmtn(Srows))
+
+
+# SchragePmtn algorithm on queue
+def schragePmtnOnQueue(rows):
+    Cmax = 0
+    Ng = PriorityQueue()
+    N = PriorityQueue()
+    temp = rows.copy()
+    for k in range(0, len(temp)):
+        N.put((temp[k].r, temp[k]))
+    t = 0
+    l = data.Row(0, 0, int(sys.maxsize))
+    tcheck = 0
+    while (not Ng.empty()) or (not N.empty()):
+        while (not N.empty()) and (tcheck == 0):
+            j = N.get()[1]
+            if (int(j.r) <= t):
+                Ng.put((-j.q, j))
+            else:
+                N.put((j.r, j))
+                tcheck = 1
+            if j.q > l.q:
+                l.p = t - j.r
+                t = j.r
+                if l.p > 0:
+                    Ng.put((-l.q, l))
+                tcheck = 0
+        if Ng.empty():
+            j = N.get()[1]
+            t = int(j.r)
+            N.put((j.r, j))
+            tcheck = 0
+        else:
+            j = Ng.get()[1]
+            l = j
+            t += int(j.p)
+            Cmax = max(Cmax, (t + j.q))
+            tcheck = 0
+    return Cmax
+
+print("Queue SchragePmtn calculate:", schragePmtnOnQueue(Srows))
 
