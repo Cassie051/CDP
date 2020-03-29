@@ -1,5 +1,5 @@
 # open and red file
-f = open('dane/data10.txt')
+f = open('dane/data200.txt')
 first_line = " ".join(f.readline().split())
 
 # added parameters from file
@@ -15,6 +15,9 @@ class Row:
     self.r = r
     self.p = p
     self.q = q
+
+  def __lt__(self, other):
+    return self.r < other.r
 
 
 # added data to row
