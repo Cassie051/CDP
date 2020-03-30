@@ -34,7 +34,6 @@ def schrage(rows):
             t = RsortMIN(N).r
     return pi
 
-print("Normal Schrage calculate:", lab1.calculate(schrage(Srows)))
 
 
 # Schrage algorithm on queue
@@ -69,7 +68,7 @@ def schrageOnQueue(rows):
             tcheck = 0
     return pi
 
-print("Queue Schrage calculate:", lab1.calculate(schrageOnQueue(Srows)))
+
 
 
 

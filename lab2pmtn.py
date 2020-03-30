@@ -1,7 +1,6 @@
 from queue import PriorityQueue
 import data, lab1, sys
 
-Srows = data.rows
 
 def RsortMIN(rows):
     rows.sort(key=lambda x: (x.r))
@@ -38,7 +37,7 @@ def schragePmtn(rows):
             Cmax = max(Cmax, (t + j.q))
     return Cmax
 
-print("Normal SchragePmtn calculate:", schragePmtn(Srows))
+
 
 
 # SchragePmtn algorithm on queue
@@ -79,5 +78,4 @@ def schragePmtnOnQueue(rows):
             tcheck = 0
     return Cmax
 
-print("Queue SchragePmtn calculate:", schragePmtnOnQueue(Srows))
 
