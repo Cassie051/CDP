@@ -11,6 +11,7 @@ def Bfind(I, Cmax):
     for i in range(1, len(rows)):
         s.append(max([rows[i].r, C[i-1]]))
         C.append(s[i]+rows[i].p)
+    for i in range(len(rows)-1, 1, -1):
         if (Cmax == (C[i] + rows[i].q)):
             return i
     return b
@@ -67,6 +68,6 @@ def carlier(rows):
     if LB < UB:
         carlier(I)
     I[c].q = qrestore
-    return LB
+    return UB
 
 
