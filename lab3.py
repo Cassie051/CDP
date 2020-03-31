@@ -1,5 +1,6 @@
 import data, lab1, lab2, lab2pmtn, sys
 
+Crow = data.rows
 
 def Bfind(I, Cmax):
     rows = I.copy()
@@ -18,9 +19,10 @@ def Bfind(I, Cmax):
 
 def Afind(I, Cmax, b):
     rows = I.copy()
-    for a in range(1, len(rows)):
+    for a in range(0, b):
         psum = 0
-        for k in range(1, b):
+        k = a
+        for k in range(0, b):
             psum += rows[k].p
         if (Cmax == (rows[a].r + psum + rows[b].q)):
             return a
@@ -29,7 +31,7 @@ def Afind(I, Cmax, b):
 def Cfind(I, Cmax, b, a):
     rows = I.copy()
     c = 0
-    for i in range(a, b):
+    for i in range(b, a, -1):
         if (rows[i].q < rows[b].q):
             return i
     return c
@@ -71,3 +73,4 @@ def carlier(rows):
     return UB
 
 
+print("\nCarlier calculate:", carlier(Crow))
