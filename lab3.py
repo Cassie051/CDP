@@ -37,7 +37,7 @@ def Cfind(I, Cmax, b, a):
 
 # Carlier algorithm
 def carlier(rows):
-    I = rows.copy()
+    I = lab2.schrage(rows)
     U = lab1.calculate(lab2.schrage(I))
     pi = 0
     p = 0
