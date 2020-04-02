@@ -1,6 +1,5 @@
 import data, lab1, lab2, lab2pmtn, sys
 
-Crow = data.rows
 
 def Bfind(I, Cmax):
     rows = I.copy()
@@ -72,5 +71,3 @@ def carlier(rows):
     I[c].q = qrestore
     return UB
 
-
-print("\nCarlier calculate:", carlier(Crow))

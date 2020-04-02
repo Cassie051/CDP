@@ -1,11 +1,10 @@
 import profile, data, lab1, lab2, lab2pmtn, lab3
 import time
 
-Crow = data.rows
-Srows = data.rows
-Rrows = data.rows.copy()
-RQrows = data.rows.copy()
-Crows = data.rows.copy()
+Srows = data.Rows.copy()
+Rrows = data.Rows.copy()
+RQrows = data.Rows.copy()
+Crows = data.Rows.copy()
 
 def millis(t):
     t = t * 1000
@@ -36,8 +35,10 @@ def main():
     # print("Queue SchragePmtn calculate:", lab2pmtn.schragePmtnOnQueue(Srows))
     
     start = time.time()
-    print("\nCarlier calculate:", lab3.carlier(Crow))
+    print("\nCarlier calculate:", lab3.carlier(Crows))
     end = time.time()
     print(millis(end - start))
 
 main()
+
+# 641 ,1267, 1492, 3070, 6398

@@ -1,7 +1,6 @@
 from queue import PriorityQueue
 import data, lab1
 
-Srows = data.rows
 
 def RsortMIN(rows):
     rows.sort(key=lambda x: (x.r))
