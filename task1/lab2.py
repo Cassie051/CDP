@@ -9,7 +9,7 @@ def RsortMIN(rows):
 def QsortMAX(rows):
     rows.sort(key=lambda x: (x.q))
     return rows[len(rows)-1]
-        
+
 
 # Schrage algorithm
 def schrage(rows):

@@ -1,3 +1,5 @@
+import os
+print(os.getcwd())
 # open and red file
 f = open('dane/data100.txt')
 first_line = " ".join(f.readline().split())

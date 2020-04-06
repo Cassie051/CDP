@@ -1,5 +1,5 @@
-import profile, data, lab1, lab2, lab2pmtn, lab3
-import time
+import time, profile, data
+import lab1, lab2, lab2pmtn, lab3
 
 Srows = data.Rows.copy()
 Rrows = data.Rows.copy()
@@ -33,7 +33,7 @@ def main():
     end = time.time()
     print(millis(end - start))
     # print("Queue SchragePmtn calculate:", lab2pmtn.schragePmtnOnQueue(Srows))
-    
+
     start = time.time()
     print("\nCarlier calculate:", lab3.carlier(Crows))
     end = time.time()
