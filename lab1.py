@@ -1,8 +1,5 @@
 import data
 
-Rrows = data.rows.copy()
-RQrows = data.rows.copy()
-Crows = data.rows.copy()
 
 # optimal algorithm
 def calculate(rows):
@@ -27,6 +24,3 @@ def RQsort(rows):
     rows.sort(key= lambda x: (x.r, x.q))
     return (calculate(rows))
 
-print("Normal calculate:", calculate(Crows))
-print("Rsort calculate:", Rsort(Rrows))
-print("RQsort calculate:", RQsort(RQrows))

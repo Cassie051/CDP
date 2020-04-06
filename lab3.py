@@ -1,6 +1,5 @@
 import data, lab1, lab2, lab2pmtn, sys
 
-Crow = data.rows
 
 def Bfind(I, Cmax):
     rows = I.copy()
@@ -12,15 +11,17 @@ def Bfind(I, Cmax):
     for i in range(1, len(rows)):
         s.append(max([rows[i].r, C[i-1]]))
         C.append(s[i]+rows[i].p)
+    for i in range(len(rows)-1, 1, -1):
         if (Cmax == (C[i] + rows[i].q)):
             return i
     return b
 
 def Afind(I, Cmax, b):
     rows = I.copy()
-    for a in range(1, len(rows)):
+    for a in range(0, b):
         psum = 0
-        for k in range(1, b):
+        k = a
+        for k in range(0, b):
             psum += rows[k].p
         if (Cmax == (rows[a].r + psum + rows[b].q)):
             return a
@@ -29,14 +30,14 @@ def Afind(I, Cmax, b):
 def Cfind(I, Cmax, b, a):
     rows = I.copy()
     c = 0
-    for i in range(a, b):
+    for i in range(b, a, -1):
         if (rows[i].q < rows[b].q):
             return i
     return c
 
 # Carlier algorithm
 def carlier(rows):
-    I = rows.copy()
+    I = lab2.schrage(rows)
     U = lab1.calculate(lab2.schrage(I))
     pi = 0
     p = 0
@@ -68,7 +69,5 @@ def carlier(rows):
     if LB < UB:
         carlier(I)
     I[c].q = qrestore
-    return LB
-
-print("Carlier calculate:", carlier(Crow))
+    return UB
 
