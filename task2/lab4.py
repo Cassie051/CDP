@@ -1,4 +1,5 @@
 import data
+import itertools as it
 
 WProcesses = data.AllProcesses.copy()
 
@@ -24,5 +25,16 @@ def sortD(Processes):
 	Processes.sort(key=lambda x: (x.d))
 	return (WiTi(Processes))
 
+def BruteForce(Processes):
+	N = data.n
+	result = []
+	MINresult = 0
+	PermProcess = it.permutations(Processes, N)
+	for i in range(0, N):
+		result.append(WiTi(PermProcess[i]))
+		MINresult = min(MINresult, result[i])
+	return MINresult
 
-print(sortD(WProcesses))
+
+
+print(BruteForce(WProcesses))
