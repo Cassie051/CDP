@@ -1,7 +1,5 @@
-import os
-print(os.getcwd())
 # open and red file
-f = open('dane/data100.txt')
+f = open('home/kasia/Dokumenty/Studia/CDP/task1/dane/data100.txt')
 first_line = " ".join(f.readline().split())
 
 # added parameters from file

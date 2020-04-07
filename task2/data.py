@@ -1,20 +1,26 @@
 # open and read file
-f = open('dane/data10.txt')
+f = open('/home/kasia/Dokumenty/Studia/CDP/task2/dane/data10.txt')
 first_line = " ".join(f.readline().split())
 
 # added parameters from file
-NK = first_line.split()
-n = int(NK[0])
-k = int(NK[1])
-i = 0
+NKfirst_line = first_line.split()
+n = int(NKfirst_line[0])
+k = int(NKfirst_line[1])
 
+# making calss Process
+AllProcesses = []
 
-allProcesses = []
+class Process:
+	def __init__(self, p, w, d):
+		self.p = p
+		self.w = w
+		self.d = d
 
 # add elements to list
-for i in range(n):
-  singleProcess = list(map(int, f.readline().split()))
-  allProcesses.append(singleProcess)
+for x in f:
+		next_lines = x.split()
+		AllProcesses.append(Process(int(next_lines[0]), int(next_lines[1]), int(next_lines[2])))
+f.close()
 
 # close file
 f.close()
