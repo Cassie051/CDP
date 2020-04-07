@@ -1,4 +1,4 @@
-import data
+import data, sys
 import itertools as it
 
 WProcesses = data.AllProcesses.copy()
@@ -29,11 +29,19 @@ def BruteForce(Processes):
 	N = data.n
 	result = []
 	MINresult = 0
-	PermProcess = it.permutations(Processes, N)
+	najlepszyWynik = int(sys.max)
+	# PermProcess = it.permutations(Processes, N)
+	# for i in range(0, N):
+	# 	result.append(PermProcess.__next__())
+	# 	MINresult = min(MINresult, result[i])
+	# return MINresult
+	PermProcess = list(it.permutations(Processes, N))
 	for i in range(0, N):
-		result.append(WiTi(PermProcess[i]))
-		MINresult = min(MINresult, result[i])
-	return MINresult
+		obecnyWynik = WiTi(PermProcess[i])
+		if(obecnyWynik <= najlepszyWynik):
+			najlepszyWynik = obecnyWynik
+			najlepszaPermutacja = PermProcess[i]
+	return najlepszaPermutacja
 
 
 
