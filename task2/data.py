@@ -1,5 +1,5 @@
 # open and read file
-f = open('/home/kasia/Dokumenty/Studia/CDP/task2/dane/data10.txt')
+f = open('dane/data10.txt')
 first_line = " ".join(f.readline().split())
 
 # added parameters from file
