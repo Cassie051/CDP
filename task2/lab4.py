@@ -2,9 +2,13 @@ import data, sys
 import itertools as it
 
 WProcesses = data.AllProcesses.copy()
-
+minimal = int(sys.maxsize)
+Processes = WProcesses.copy()
+rep = 0
 N = data.n
 
+
+# WiTi
 def WiTi(WProcesses):
 	Processes = WProcesses.copy()
 	S = []
@@ -25,7 +29,27 @@ def sortD(Processes):
 	Processes.sort(key=lambda x: (x.d))
 	return (WiTi(Processes))
 
-def BruteForce(WProcesses):
+
+# Brute Force R
+def BruteForceR(reps, minimal_value):
+	iterations = 0
+	for p in Permutation(N_elements(N)):
+		if (iterations == reps):
+			single_combi = []
+			single_combi = p.copy()
+			rearanged = Rearange(single_combi,Processes)
+			current_value = WiTi(rearanged)
+			reps += 1
+			if (current_value < minimal_value):
+				minimal_value = current_value
+			return BruteForceR(reps, minimal_value)
+		else:
+			iterations += 1
+	return minimal_value
+
+
+# Brute Force I
+def BruteForceI(WProcesses):
 	Processes = WProcesses.copy()
 	minimal_value = sys.maxsize
 
@@ -36,8 +60,8 @@ def BruteForce(WProcesses):
 		current_value = WiTi(rearanged)
 		if current_value < minimal_value :
 			minimal_value = current_value
-
 	return minimal_value
+
 
 # zmiana kolejności danych, użytych później w WiTi
 def Rearange(single_combi, Procesess):
@@ -65,4 +89,5 @@ def Permutation(lst):
 				yield ([x]+p)
 
 
-print (BruteForce(WProcesses))
+print (BruteForceI(WProcesses))
+print (BruteForceR(rep, minimal))
