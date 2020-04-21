@@ -23,9 +23,9 @@ def NotRepCombinations(seter, at, m, n, subsets):
             seter &= ~(1 << i)
 
 
+# WiTi DP Iteration
 def PDi(PDProcesses):
     Processes = PDProcesses.copy()
-    MinF = int(sys.maxsize)
     result = -1
 
     F = [[] for i in range(0, N)]
@@ -47,24 +47,22 @@ def PDi(PDProcesses):
                 if(((1<<nextP)&subset) == 0):
                     continue
                 subsetWithoutNext = subset^(1<<nextP)
+                MinF = int(sys.maxsize)
                 for end in range(0, N):
                     if (end==nextP or ((1<<end)&subset)==0):
                         continue
-                    help = 0
+                    sumP = 0
                     for k in range(0, N):
                         if not (((1<<k)&subset) == 0):
-                            help += Processes[k].p
+                            sumP += Processes[k].p
 
-                    if (help - Processes[nextP].d) > 0:
-                        newF = F[end][subsetWithoutNext] + (help - Processes[nextP].d) * Processes[nextP].w
-                        if(MinF > newF):
-                            F[nextP][subset] = newF
-                    # if((help + Processes[nextP].p - Processes[nextP].d) > 0):
-                    #     help = (help + Processes[nextP].p - Processes[nextP].d) * Processes[nextP].w
-                    # newF = F[end][subsetWithoutNext] + help
-                    # if(newF < MinF) and (newF >= 0):
-                    #     MinF = newF
-                    # F[nextP][subset] = MinF
+                    if (sumP  - Processes[nextP].d) > 0:
+                        newF = F[end][subsetWithoutNext] + (sumP - Processes[nextP].d) * Processes[nextP].w
+                    else:
+                        newF = F[end][subsetWithoutNext]
+                    if(MinF > newF):
+                        MinF = newF
+                F[nextP][subset] = MinF
 
     MinResult = int(sys.maxsize)
     for i in range(0, N):
@@ -72,7 +70,6 @@ def PDi(PDProcesses):
             MinResult = F[i][2**(N)-1]
         print(F[i][2**(N)-1])
     return MinResult
-
 
 
 print(PDi(PDProcesses))
