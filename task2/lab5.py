@@ -68,7 +68,6 @@ def PDi(PDProcesses):
     for i in range(0, N):
         if(F[i][2**(N)-1] < MinResult):
             MinResult = F[i][2**(N)-1]
-        print(F[i][2**(N)-1])
     return MinResult
 
 
