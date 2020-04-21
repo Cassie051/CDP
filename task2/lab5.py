@@ -5,25 +5,6 @@ PDProcesses = data.AllProcesses.copy()
 
 N = data.n
 
-# def NotRepCombinations():
-#     check = []
-#     comb = []
-#     help = []
-#     index = []
-#     for x in it.permutations('1100', 4 ):
-#             check.append(x)
-#     for i in range(0, len(check)):
-#         help = check[i]
-#         for j in range(0, len(check)):
-#             if help == check[j]:
-#                 flag = 1
-#                 index.append(j)
-#         if (flag):
-#             for k in index:
-#                 check.remove(check[k])
-#                 flag = 0
-#     return check
-
 # Mask set
 def Mask(m, n):
     subsets = []
@@ -55,22 +36,23 @@ def PDi(PDProcesses):
     # prep the first (initial) iteretion of the matrix
     for i in range(0, N):
         if(Processes[i].p - Processes[i].d) > 0:
-            F[i][1|(1<<i)] = (Processes[i].p - Processes[i].d)*Processes[i].w
+            F[i][1<<i] = (Processes[i].p - Processes[i].d)*Processes[i].w
         else:
-             F[i][1|(1<<i)] = 0
+             F[i][(1<<i)] = 0
+        # print(F[i][4])
 
-    for r in range(2, N):
+    for r in range(2, N+1):
         for subset in Mask(r, N):
-            for nextP in range(1, N):
+            for nextP in range(0, N):
                 if(((1<<nextP)&subset) == 0):
                     continue
                 subsetWithoutNext = subset^(1<<nextP)
-                for end in range(1, N):
+                for end in range(0, N):
                     if (end==nextP or ((1<<end)&subset)==0):
                         continue
                     help = 0
                     for k in range(0, N):
-                        if (not ((1<<k)&subset)) == 0:
+                        if not (((1<<k)&subset) == 0):
                             help += Processes[k].p
 
                     if (help - Processes[nextP].d) > 0:
@@ -88,9 +70,9 @@ def PDi(PDProcesses):
     for i in range(0, N):
         if(F[i][2**(N)-1] < MinResult):
             MinResult = F[i][2**(N)-1]
-        print(F[i][2**(N)-2])
-
+        print(F[i][2**(N)-1])
     return MinResult
+
 
 
 print(PDi(PDProcesses))
