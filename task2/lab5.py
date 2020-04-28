@@ -25,26 +25,28 @@ def NotRepCombinations(seter, at, m, n, subsets):
 def PDinit():
     bits = (2**(N))-1
     F = []
-    for j in range(0, int(2**(N))):
+    F.append(0)
+    for j in range(1, 2**(N)):
         F.append(-1)
     return PDr(F, bits)
 
 def PDr(F, bits):
     result = int(sys.maxsize)
-    for i in range(1, N):
+    for i in range(0, N):
         if not(bits&(1<<i) == 0):
-            new_bits = (bits&(~(1<<i)))
             if (bits == 0):
                 return 0
-            if (int(F[new_bits]) == -1):
-                F.insert(new_bits, int(PDr(F, new_bits)))
             previous_time = 0
+            new_bits = bits&(~(1<<i))
+            if (F[new_bits] == -1):
+                F[new_bits] = PDr(F, new_bits)
 
-            for j in range(1, N):
+            for j in range(0, N):
                 if not(bits&(1<<j) == 0):
                     previous_time += PDProcesses[j].p
-            current_penalty = PDProcesses[i].w * max(0, previous_time-PDProcesses[i].d)
-            result = min(result, current_penalty + F[new_bits])
+            # current_penalty = PDProcesses[i].w * max(0, previous_time-PDProcesses[i].d)
+            # result = min(result, current_penalty + F[new_bits])
+            result = min(result, max(previous_time - PDProcesses[i].d, 0) * PDProcesses[i].w + F[new_bits])
     return result
 
 # WiTi DP Iteration

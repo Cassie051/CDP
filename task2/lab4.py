@@ -1,4 +1,4 @@
-import data, sys
+import data, sys, time
 import itertools as it
 
 WProcesses = data.AllProcesses.copy()
@@ -88,6 +88,12 @@ def Permutation(lst):
 			for p in Permutation(xs):
 				yield ([x]+p)
 
+start = time.time()
+print("\nBFi calculate:", BruteForceI(WProcesses))
+end = time.time()
+print(end-start)
 
-print (BruteForceI(WProcesses))
-print (BruteForceR(rep, minimal))
+start = time.time()
+print("\nBFi calculate:", BruteForceR(rep, minimal))
+end = time.time()
+print(end-start)
