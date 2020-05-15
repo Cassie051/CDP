@@ -9,4 +9,4 @@ with open(filepath) as fp:
 
     data = []
     for i in range (n):
-       data.append([int(j) for j in fp.readline().split()])
+        data.append([int(m) for m in fp.readline().split()])
