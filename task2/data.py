@@ -1,5 +1,5 @@
 # open and read file
-f = open('D:/Git/CDP/task2/dane/data10.txt')
+f = open('D:/Git/CDP/task2/dane/data14.txt')
 first_line = " ".join(f.readline().split())
 
 # added parameters from file

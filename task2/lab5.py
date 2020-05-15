@@ -97,10 +97,10 @@ def PDi(PDProcesses):
     return MinResult
 
 
-start = time.time()
-print("\nPDi calculate:", PDi(PDProcesses))
-end = time.time()
-print(end-start)
+# start = time.time()
+# print("\nPDi calculate:", PDi(PDProcesses))
+# end = time.time()
+# print(end-start)
 
 start = time.time()
 print("\nPDr calculate:", PDinit())
