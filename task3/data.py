@@ -8,5 +8,12 @@ with open(filepath) as fp:
     m = int(NMfirst_line[1])
 
     data = []
+    hel = []
     for i in range (n):
-        data.append([int(m) for m in fp.readline().split()])
+        hel.append([int(m) for m in fp.readline().split()])
+
+    for i in range (n):
+        new =[]
+        for j in range(1, len(hel[0]), 2):
+            new.append(hel[i][j])
+        data.append(new)
