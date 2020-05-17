@@ -1,4 +1,6 @@
+
 filepath = 'dane/data001.txt'
+
 with open(filepath) as fp:
     first_line = " ".join(fp.readline().split())
 
@@ -17,3 +19,5 @@ with open(filepath) as fp:
         for j in range(1, len(hel[0]), 2):
             new.append(hel[i][j])
         data.append(new)
+
+#print (n)

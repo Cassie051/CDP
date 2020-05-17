@@ -1,4 +1,4 @@
-import data
+import data, lab6
 import sys
 
 Processes = data.data
@@ -28,8 +28,6 @@ def Johnson(jProcesses):
             k -= 1
             minP = int(sys.maxsize)
         jProcesses.remove(jProcesses[minN])
-    # Cmax(result)
-    return result
+    return lab6.Cmax(result)
 
-print(Processes[0][0])
 print(Johnson(Processes))
