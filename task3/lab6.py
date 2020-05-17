@@ -68,3 +68,4 @@ def Rearange(single_combi, Procesess):
 	return rearanged_list
 
 print (BruteForce(Processes))
+
