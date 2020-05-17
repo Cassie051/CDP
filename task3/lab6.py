@@ -1,9 +1,7 @@
 import data
-import sys, itertools
-
+import sys
 Processes = data.data
-N = data.n
-M = data.m
+
 
 def Cmax(CProcesses):
     Cstart = 0
@@ -28,20 +26,42 @@ def Cmax(CProcesses):
 
 # not works yet
 def BruteForce(BProcesses):
-    price = int(sys.maxsize)
-    result = []
-    while True:
-        tmp = Cmax(BProcesses)
-        if(tmp < price):
-            price = tmp
-            result.clear()
-            for i in range(0, N):
-                result.append(BProcesses[i].index())
-        for j in range(0, M):
-            itertools.permutations(Processes[j], M).__next__()
+	minimal_value = []
+    minimal_value.append(sys.maxsize)
+    machine = 0
+    Elem = N_elements(data.n)
+while machine < data.m
+	for p in Permutation(Elem):
+		single_combi = []
+		single_combi = p.copy()
+		rearanged = Rearange(single_combi,Processes,machine)
+		current_value = Cmax(rearanged)
+		if current_value < minimal_value[machine] :
+			minimal_value[machine] = current_value
+	return minimal_value[machine]
 
-        if (itertools.permutations(Processes[0], N).__next__() == 0):
-            break
-    return price
+def Permutation(lst):
+	if len(lst) == 0:
+		yield []
+	elif  len(lst) == 1:
+		yield (lst)
+	else:
+		for i in range(len(lst)):
+			x = lst[i]
+			xs = lst[:i] + lst[i+1:]
+			for p in Permutation(xs):
+				yield ([x]+p)
 
-print (Cmax(Processes))
+def N_elements(N):
+	index = []
+	for i in range(0,N):
+		index.append(i)
+	return (index)
+
+
+def Rearange(single_combi, Procesess, machine):
+	rearanged_list = []
+	for x in range (N):
+		rearanged_list.insert(single_combi[x], Procesess[x][machine])
+	return rearanged_list
+
