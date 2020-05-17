@@ -1,6 +1,8 @@
 import data
 import sys
 Processes = data.data
+N = data.n
+M = data.m
 
 
 def Cmax(CProcesses):
@@ -25,16 +27,16 @@ def Cmax(CProcesses):
     return endList[N-1][M-1]
 
 # not works yet
-def BruteForce(BProcesses):
+def BruteForce(BProcesess):
+	WorkProcess = BProcesess.copy()
+	min = sys.maxsize
 	minimal_value = []
-    minimal_value.append(sys.maxsize)
-    machine = 0
-    Elem = N_elements(data.n)
-while machine < data.m
+	minimal_value.append(min)
+	Elem = N_elements(data.n)
 	for p in Permutation(Elem):
 		single_combi = []
 		single_combi = p.copy()
-		rearanged = Rearange(single_combi,Processes,machine)
+		rearanged = Rearange(single_combi,WorkProcess)
 		current_value = Cmax(rearanged)
 		if current_value < minimal_value[machine] :
 			minimal_value[machine] = current_value
@@ -58,10 +60,12 @@ def N_elements(N):
 		index.append(i)
 	return (index)
 
-
-def Rearange(single_combi, Procesess, machine):
+def Rearange(single_combi, Procesess):
+	machine = 0
 	rearanged_list = []
-	for x in range (N):
-		rearanged_list.insert(single_combi[x], Procesess[x][machine])
+	for machine in range (M):
+		for x in range (N):
+			rearanged_list.insert(single_combi[x], Procesess[x][machine])
 	return rearanged_list
 
+BruteForce(Processes)
