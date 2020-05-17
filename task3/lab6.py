@@ -20,12 +20,10 @@ def Cmax(CProcesses):
                 else:
                     Cstart = max(endList[i-1][j], Cend)
                 Cend = Cstart + CProcesses[i][j]
-
             startList[i][j] = Cstart
             endList[i][j] = Cend
     return endList[N-1][M-1]
 
-# not works yet
 def BruteForce(BProcesess):
 	WorkProcess = BProcesess.copy()
 	min = sys.maxsize
