@@ -4,7 +4,6 @@ Processes = data.data
 N = data.n
 M = data.m
 
-
 def Cmax(CProcesses):
     Cstart = 0
     Cend = 0
