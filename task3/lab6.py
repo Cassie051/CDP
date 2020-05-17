@@ -20,10 +20,12 @@ def Cmax(CProcesses):
                 else:
                     Cstart = max(endList[i-1][j], Cend)
                 Cend = Cstart + CProcesses[i][j]
+
             startList[i][j] = Cstart
             endList[i][j] = Cend
     return endList[N-1][M-1]
 
+# not works yet
 def BruteForce(BProcesess):
 	WorkProcess = BProcesess.copy()
 	min = sys.maxsize
@@ -59,11 +61,10 @@ def N_elements(N):
 
 def Rearange(single_combi, Procesess):
 	machine = 0
-	rearanged_list = [[0 for i in range(M)] for j in range(N)] 
+	rearanged_list = [[0 for i in range(M)] for j in range(N)]
 	for machine in range (M):
 		for x in range (N):
 			rearanged_list[single_combi[x]][machine] = Procesess[x][machine]
 	return rearanged_list
 
 print (BruteForce(Processes))
-
