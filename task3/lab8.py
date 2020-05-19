@@ -50,8 +50,8 @@ def Bound(BProcesses, pi, case):
     else:
         return print("No LB type")
 
-def BnB(j, BProcesses, pi, result):
-    UB = result
+def BnB(j, BProcesses, pi):
+    UB = int(sys.maxsize)
     pi = pi.copy()
     pi.append(j)
     BProcesses.remove(j)
@@ -59,7 +59,7 @@ def BnB(j, BProcesses, pi, result):
         LB =  Bound(BProcesses, pi, 1)
         if(LB <= UB):
             for j in BProcesses:
-                UB = BnB(j, BProcesses, pi, UB)
+                UB = BnB(j, BProcesses, pi)
     else:
         Cmax =  lab6.Cmax(pi)
         if(Cmax < UB):
@@ -71,7 +71,7 @@ def initBnB(BProcesses):
     pi = []
     result = int(sys.maxsize)
     for j in BProcesses:
-        result = min(result, BnB(j, BProcesses, pi, result))
+        result = min(result, BnB(j, BProcesses, pi))
     return result
 
 print(initBnB(Processes))
