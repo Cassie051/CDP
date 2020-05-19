@@ -67,4 +67,4 @@ def Rearange(single_combi, Procesess):
 			rearanged_list[single_combi[x]][machine] = Procesess[x][machine]
 	return rearanged_list
 
-print (BruteForce(Processes))
+# print (BruteForce(Processes))
