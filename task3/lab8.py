@@ -35,20 +35,19 @@ def Bound(BProcesses, pi, case):
         return print("No LB type")
 
 def BnB(j, BProcesses, pi):
-    picopy = []
     UB = int(sys.maxsize)
-    picopy.append(j)
+    pi.append(j)
     BProcesses.remove(j)
-    if(len(BProcesses) != 0):
-        LB =  Bound(BProcesses, picopy, 1)
+    if not (len(BProcesses) == 0):
+        LB =  Bound(BProcesses, pi, 1)
         if(LB <= UB):
             for j in BProcesses:
-                BnB(j, BProcesses, picopy)
+                BnB(j, BProcesses, pi)
     else:
-        Cmax =  lab6.Cmax(picopy)
+        Cmax =  lab6.Cmax(pi)
         if(Cmax < UB):
             UB = Cmax
-            best = picopy         # zapamietujemy najlepsza permutacja
+            best = pi         # zapamietujemy najlepsza permutacja
     return UB
 
 

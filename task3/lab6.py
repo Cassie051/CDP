@@ -9,7 +9,7 @@ def Cmax(CProcesses):
     Cend = 0
     endList = [[0 for i in range(M)]  for j in range(N)]
     startList = [[0 for i in range(M)]  for j in range(N)]
-    for i in range(0, N):
+    for i in range(0, len(CProcesses)):
         for j in range(0, M):
             if(i == 0):
                 Cstart = Cend
