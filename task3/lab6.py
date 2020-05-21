@@ -1,5 +1,7 @@
 import data
 import sys
+import time
+
 Processes = data.data
 N = data.n
 M = data.m
@@ -67,4 +69,8 @@ def Rearange(single_combi, Procesess):
 			rearanged_list[single_combi[x]][machine] = Procesess[x][machine]
 	return rearanged_list
 
+start = time.time()
 print (BruteForce(Processes))
+end = time.time()
+T = end - start
+print(T)

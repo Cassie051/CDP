@@ -1,5 +1,6 @@
 import data, lab6
 import sys
+import time
 
 Processes = data.data
 N = data.n
@@ -74,4 +75,8 @@ def initBnB(BProcesses):
         result = min(result, BnB(j, BProcesses, pi))
     return result
 
+start = time.time()
 print(initBnB(Processes))
+end = time.time()
+T = end - start
+print(T)

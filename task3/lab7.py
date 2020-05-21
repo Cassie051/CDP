@@ -1,5 +1,6 @@
 import data, lab6
 import sys
+import time
 
 Processes = data.data
 N = data.n
@@ -30,4 +31,8 @@ def Johnson(jProcesses):
         jProcesses.remove(jProcesses[minN])
     return lab6.Cmax(result)
 
+start = time.time()
 print(Johnson(Processes))
+end = time.time()
+T = end - start
+print("TIME: ",T*1000)
