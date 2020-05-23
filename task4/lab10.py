@@ -43,10 +43,43 @@ def chillLinear(T,x):
     Ice_Cold_T = T - x
     return Ice_Cold_T
 
+def chillGeometric(T, alpha):
+    Ice_Cold_T = T*alpha
+    return Ice_Cold_T
+
 def chillLog(T, iter):
     Ice_Cold_T = T/math.log(iter+1)
     return Ice_Cold_T
 
+def moveMethod(mm, i, j, pi):
+    if mm == 'swap':
+
+    elif mm == 'insert':
+    
+    elif mm == 'twist':
+        
+    elif mm == 'adjacent':
+    
+    else:
+        pass
+
 def SAA():
     T0 = sys.maxsize
     T = T0
+    pi = 5
+    while T>Tend:
+        for k = 1 in range(1,L):
+            i = random.randint(1,N)
+            j = random.randint(1,N)
+            pi_new = moveMethod(mm,i,j,pi)
+            if Cmax(pi_new) > Cmax(pi):
+                r = random.random()
+                p = probability(pi, pi_new)
+                if r >= p:
+                    pi_new = pi
+            pi = pi_new
+            if Cmax(pi) < Cmax(pi_new):
+                pi_new = pi
+        T = reduceMethod(rm, T)
+    return T
+
