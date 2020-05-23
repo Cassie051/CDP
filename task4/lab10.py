@@ -1,6 +1,8 @@
 import data
 import random
 import sys
+import math
+
 
 Processes = data.data.copy()
 N = data.n
@@ -29,5 +31,22 @@ def Cmax(CProcesses):
 
 #Kowalstwo
 
+def deltaCmac(pi, pi_new):
+    return Cmax(pi)-Cmax(pi_new)
+
+def probability(pi, pi_new, T):
+    delta = deltaCmac(pi, pi_new)
+    prob = math.exp(delta/T)
+    return prob
+
+def chillLinear(T,x):
+    Ice_Cold_T = T - x
+    return Ice_Cold_T
+
+def chillLog(T, iter):
+    Ice_Cold_T = T/math.log(iter+1)
+    return Ice_Cold_T
+
 def SAA():
     T0 = sys.maxsize
+    T = T0
