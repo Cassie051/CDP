@@ -1,4 +1,4 @@
-import data
+import data, sys
 
 Processes = data.data.copy()
 N = data.n
@@ -25,4 +25,14 @@ def Cmax(CProcesses):
             endList[i][j] = Cend
     return endList[M-1][N-1]
 
-# def Neh(NProcesses):
+def Neh(NProcesses):
+    k = 1
+    W = []
+    for j in NProcesses:
+        tmp = 0
+        for i in range(M):
+            tmp += j[i]
+        W.append(tmp, j)
+    W.sort(key = lambda x: (x[0]))
+    while len(W) != 0 :
+        
