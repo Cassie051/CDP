@@ -4,17 +4,17 @@ import sys
 import math
 
 
-Processes = data.data.copy()
+Processes = data.tmp.copy()
 N = data.n
 M = data.m
 
 T0 = 100 #100 10000
 L = int(math.sqrt(N)) #N N*N
 x = T0/1000 #T0/10000 T0/100000
-alpha = 0,97 #0,95 0,90
-Tend = 0.01 #0.001 0.0001
-rm = 'l' # 'g' 'i'
-mm = 's' #'i' 't' 'a'
+alpha = 0.97 #0,95 0,90
+Tend = 1 #0.01 #0.001 0.0001
+rm = 'i' #'l'  g' 'i'
+mm = 'a' #'i' 't' 'a'
 
 def Cmax(CProcesses):
     Cstart = 0
@@ -49,22 +49,20 @@ def probability(pi, pi_new, T):
 
 def chillLinear(T, x):
     Ice_Cold_T = T - x
-    return Ice_Cold_T
+    return float(Ice_Cold_T)
 
 def chillGeometric(T, alpha):
     Ice_Cold_T = T*alpha
-    return Ice_Cold_T
+    return float(Ice_Cold_T)
 
 def chillLog(T, iterator):
     Ice_Cold_T = T/math.log(iterator+1)
-    return Ice_Cold_T
+    return float(Ice_Cold_T)
 
 def moveMethod(mm, i, j, pi):
     if mm == 's':
         for x in range (M):
-            temp = pi[i][x]
-            pi[i][x] = pi[j][x]
-            pi[j][x] = temp
+            pi[i][x], pi[j][x] = pi[j][x], pi[i][x]
              #prosta zamiana 
         return pi
 
@@ -113,24 +111,26 @@ def moveMethod(mm, i, j, pi):
 
 def reduceMethod(rm, T, iterator):
     if rm == 'l':
-        chillLinear(T, x)
+         chill_Lin = chillLinear(T, x)
+         return chill_Lin
     elif rm == 'g':
-        chillGeometric(T, alpha)
+        chill_Geo = chillGeometric(T, alpha)
+        return chill_Geo
     elif rm == 'i':
-        chillLog(T, iterator)
+        chill_Log = chillLog(T, iterator)
+        return chill_Log
     else:
         pass
 
 def SAA():
-    AlgProc = Processes.copy()
+    pi = Processes.copy()
+    pi_best = pi 
     T = T0
-    pi = AlgProc
-    pi_best = pi
-    
+    iterator = 0
     while T > Tend:
         for k in range(1,L):
-            i = random.randint(1,N)
-            j = random.randint(1,N)
+            i = random.randint(1,N-1)
+            j = random.randint(1,N-1)
             pi_new = moveMethod(mm,i,j,pi)
             if Cmax(pi_new) > Cmax(pi):
                 r = random.random()
@@ -140,7 +140,9 @@ def SAA():
             pi = pi_new
             if Cmax(pi) < Cmax(pi_best):
                 pi_best = pi
-        T = reduceMethod(rm, T)
+        iterator += 1
+        #print (iterator)
+        T = reduceMethod(rm, T0, iterator)
     return pi_best
 
 print (SAA())
