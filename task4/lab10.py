@@ -9,10 +9,12 @@ N = data.n
 M = data.m
 
 T0 = 100 #100 10000
-L = math.sqrt(N) #N N*N
+L = int(math.sqrt(N)) #N N*N
 x = T0/1000 #T0/10000 T0/100000
 alpha = 0,97 #0,95 0,90
 Tend = 0.01 #0.001 0.0001
+rm = 'l' # 'g' 'i'
+mm = 's' #'i' 't' 'a'
 
 def Cmax(CProcesses):
     Cstart = 0
@@ -58,12 +60,15 @@ def chillLog(T, iterator):
     return Ice_Cold_T
 
 def moveMethod(mm, i, j, pi):
-    if mm == 'swap':
+    if mm == 's':
         for x in range (M):
-            pi[i][x], pi[j][x] = pi[j][x], pi[i][x] #prosta zamiana 
+            temp = pi[i][x]
+            pi[i][x] = pi[j][x]
+            pi[j][x] = temp
+             #prosta zamiana 
         return pi
 
-    elif mm == 'insert':
+    elif mm == 'i':
         for x in range(M):
             temp = pi[i][x]
             for y in range(N):
@@ -78,8 +83,8 @@ def moveMethod(mm, i, j, pi):
                 else:
                     pass
         return pi
-        
-    elif mm == 'twist':
+
+    elif mm == 't':
         if i > j:
             a = j
             b = i
@@ -94,24 +99,24 @@ def moveMethod(mm, i, j, pi):
                 b = b - 1
         return pi
 
-    elif mm == 'adjacent':
+    elif mm == 'a':
         first = pi[i][0]
         for x in range (1,M):
             if x == M-1 :
-                pi[i][x] = first
+                pi[i][x] = first #zapamiętuje pierwszy element
             else:    
-                pi[i][x] = pi[i][x-1]
+                pi[i][x] = pi[i][x-1] #cofa każdy z elementów
         return pi
 
     else:
         pass
 
 def reduceMethod(rm, T, iterator):
-    if rm == 'linear':
+    if rm == 'l':
         chillLinear(T, x)
-    elif rm == 'geometric'
+    elif rm == 'g':
         chillGeometric(T, alpha)
-    elif rm == 'log':
+    elif rm == 'i':
         chillLog(T, iterator)
     else:
         pass
@@ -123,7 +128,7 @@ def SAA():
     pi_best = pi
     
     while T > Tend:
-        for k = 1 in range(1,L):
+        for k in range(1,L):
             i = random.randint(1,N)
             j = random.randint(1,N)
             pi_new = moveMethod(mm,i,j,pi)
@@ -134,7 +139,8 @@ def SAA():
                     pi_new = pi
             pi = pi_new
             if Cmax(pi) < Cmax(pi_best):
-                pi_new = pi
+                pi_best = pi
         T = reduceMethod(rm, T)
-    return T
+    return pi_best
 
+print (SAA())

@@ -25,3 +25,4 @@ data = [[0 for i in range(n)] for j in range(m)]
 for i in range(n):
     for j in range(m):
         data[j][i] = tmp[i][j]
+
