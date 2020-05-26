@@ -60,7 +60,7 @@ def chillLog(T, iterator):
 def moveMethod(mm, i, j, pi):
     if mm == 'swap':
         for x in range (M):
-            pi[i][x],pi[j][x] = pi[j][x],pi[i][x] #prosta zamiana 
+            pi[i][x], pi[j][x] = pi[j][x], pi[i][x] #prosta zamiana 
         return pi
 
     elif mm == 'insert':
@@ -78,13 +78,30 @@ def moveMethod(mm, i, j, pi):
                 else:
                     pass
         return pi
+        
     elif mm == 'twist':
+        if i > j:
+            a = j
+            b = i
+        else:
+            a = i
+            b = j #przypisuje na przyszłość indeksy do wygodniejszego używania
+
         for x in range(M):
-            while i < j:
-                pi[i][x],pi[j][x] = pi[j][x],pi[i][x]
+            while a < b:
+                pi[a][x], pi[b][x] = pi[b][x], pi[a][x] #podmienia elementy
+                a = i + 1   #przemieszcza indeksy
+                b = b - 1
+        return pi
 
     elif mm == 'adjacent':
-        
+        first = pi[i][0]
+        for x in range (1,M):
+            if x == M-1 :
+                pi[i][x] = first
+            else:    
+                pi[i][x] = pi[i][x-1]
+        return pi
 
     else:
         pass
