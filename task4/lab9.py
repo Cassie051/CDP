@@ -1,4 +1,5 @@
 import data, sys
+import copy
 
 Processes = data.data.copy()
 N = data.n
@@ -26,26 +27,86 @@ def Cmax(CProcesses):
     return endList[len(CProcesses)-1][len(CProcesses[0])-1]
 
 def Neh(NProcesses):
-    k = 1
+    k = 0
     W = []
-    pi = []
-    pitmp = []
-    for j in NProcesses:
+    pi = [[] for j in range(M)]
+    pitmp = [[] for j in range(M)]
+    tabj = []
+    for i in range(N):
         tmp = 0
-        for i in range(M):
+        for j in NProcesses:
             tmp += j[i]
-        W.append([tmp, j])
-    W.sort(key = lambda x: (x[0]))
+            tabj.insert(len(tabj), j[i])
+        W.append([tmp, tabj.copy()])
+        del tabj[0:]
+    W.sort(key = lambda x: x[0])
     while len(W) != 0 :
         j = W[len(W)-1][1]
+        for i in range(len(j)):
+            pitmp[i].append(j[i])
+            pi[i].append(j[i])
         for l in range(0, k):
-            pitmp.insert(l, j)
-            if len(pi) == 0:
-                pi.insert(l, j)
-            elif Cmax(pitmp) < Cmax(pi):
-                pi.insert(l, j)
+            if k>0:
+                for i in range(len(j)):
+                    pitmp[i][k-l], pitmp[i][k-l-1] = pitmp[i][k-l-1], pitmp[i][k-l]
+            if Cmax(pitmp) < Cmax(pi):
+                pi = copy.deepcopy(pitmp)
         del W[len(W)-1]
         k += 1
     return Cmax(pi)
+
+
+# def Select(W, case):
+#     if(case == 1):
+#         # najdluzsza operacja na sciezce krytycznej
+#     elif(case == 2):
+#         # najwieksza suma operacji wchodzacych na sciezke krytyczna
+#     elif(case == 3):
+#         # najwieksza liczba operacji wchodzacych na sciezke krytyczna
+#     elif(case == 4):
+#         # najwieksze zmniejszenie Cmax
+#         for
+
+def NehPlus(NProcesses):
+    k = 0
+    W = []
+    pi = [[] for j in range(M)]
+    pitmp = [[] for j in range(M)]
+    tabj = []
+    for i in range(N):
+        tmp = 0
+        for j in NProcesses:
+            tmp += j[i]
+            tabj.insert(len(tabj), j[i])
+        W.append([tmp, tabj.copy()])
+        del tabj[0:]
+    W.sort(key = lambda x: x[0])
+    while len(W) != 0 :
+        j = W[len(W)-1][1]
+        for i in range(len(j)):
+            pitmp[i].append(j[i])
+            pi[i].append(j[i])
+        for l in range(0, k):
+            if k>0:
+                for i in range(len(j)):
+                    pitmp[i][k-l], pitmp[i][k-l-1] = pitmp[i][k-l-1], pitmp[i][k-l]
+            if Cmax(pitmp) < Cmax(pi):
+                pi = copy.deepcopy(pitmp)
+        del W[len(W)-1]
+
+        x = Select(W, 4)
+        if(x != j):
+            for i in range(len(x)):
+                pitmp[i].append(x[i])
+                pi[i].append(x[i])
+            for l in range(0, k):
+                if k>0:
+                    for i in range(len(x)):
+                        pitmp[i][k-l], pitmp[i][k-l-1] = pitmp[i][k-l-1], pitmp[i][k-l]
+                if Cmax(pitmp) < Cmax(pi):
+                    pi = copy.deepcopy(pitmp)
+        k += 1
+    return Cmax(pi)
+
 
 print(Neh(Processes))
