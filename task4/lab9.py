@@ -117,6 +117,8 @@ def NehPlus(NProcesses):
     W = []
     pi = [[] for j in range(M)]
     pitmp = [[] for j in range(M)]
+    piX = [[] for j in range(M)]
+    pitmpX = [[] for j in range(M)]
     tabj = []
     flag = -1
     for i in range(N):
@@ -141,19 +143,21 @@ def NehPlus(NProcesses):
         del W[len(W)-1]
         flag += 1
 
-        if(flag > 0):
+        if(flag > 1):
             Wx = copy.deepcopy(W)
-            x = Select(Wx, pi.copy(), 4)
+            x = Select(Wx, piX.copy(), 4)
             if(x != j):
                 for i in range(len(x)):
-                    pitmp[i].append(x[i])
-                    pi[i].append(x[i])
+                    pitmpX[i].append(x[i])
+                    piX[i].append(x[i])
                 for l in range(0, k):
                     if k>0:
                         for i in range(len(x)):
-                            pitmp[i][k-l], pitmp[i][k-l-1] = pitmp[i][k-l-1], pitmp[i][k-l]
-                    if Cmax(pitmp) < Cmax(pi):
-                        pi = copy.deepcopy(pitmp)
+                            pitmpX[i][k-l], pitmpX[i][k-l-1] = pitmpX[i][k-l-1], pitmpX[i][k-l]
+                    if Cmax(pitmpX) < Cmax(piX):
+                        piX = copy.deepcopy(pitmpX)
+        piX = copy.deepcopy(pi)
+        pitmpX = copy.deepcopy(pitmp)
         k += 1
     return Cmax(pi)
 
