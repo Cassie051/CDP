@@ -21,7 +21,6 @@ def Cmax(CProcesses):
                 else:
                     Cstart = max(endList[i-1][j], Cend)
                 Cend = Cstart + CProcesses[i][j]
-
             startList[i][j] = Cstart
             endList[i][j] = Cend
     return endList[len(CProcesses)-1][len(CProcesses[0])-1]
@@ -44,9 +43,7 @@ def CNeh(CProcesses):
                 Cend = Cstart + CProcesses[i][j]
             startList[i][j] = Cstart
             endList[i][j] = Cend
-
     return endList
-
 
 def Neh(NProcesses):
     k = 0
@@ -77,7 +74,6 @@ def Neh(NProcesses):
         k += 1
     return Cmax(pi)
 
-
 def Select(Wx, pi, case):
     if(case == 1):
         # najdluzsza operacja na sciezce krytycznej
@@ -87,7 +83,26 @@ def Select(Wx, pi, case):
         List = CNeh(pi)
         for i in range(len(List)-1, 0):
             for j in range(len(List[0])-1, 0):
+                last = 0
                 tmp = List[i][j]
+                last1 = List[i][j]
+                last2 = List[i][j]
+                flag = False
+                if(not flag):
+                    if i==0 and j==0:
+                        return last
+                    if i == 0:
+                        last += List[0][j-1]
+                    else:
+                        if j == 0:
+                            last += List[i-1][0]
+                        elif List[i-1][j] > List[i][j-1]:
+                            last += List[i][j-1]
+                        elif List[i-1][j] < List[i][j-1]:
+                            last += List[i-1][j]
+                        else:
+                            last1 += List[i-1][j]
+                            last2 += List[i][j-1]
     elif(case == 3):
         # najwieksza liczba operacji wchodzacych na sciezke krytyczna
         return "nothing"
@@ -109,8 +124,6 @@ def Select(Wx, pi, case):
                 task = copy.deepcopy(tmptask)
             pi = copy.deepcopy(tpi)
         return task
-
-
 
 def NehPlus(NProcesses):
     k = 0
@@ -145,7 +158,7 @@ def NehPlus(NProcesses):
 
         if(flag > 1):
             Wx = copy.deepcopy(W)
-            x = Select(Wx, piX.copy(), 4)
+            x = Select(Wx, piX.copy(), 2)
             if(x != j):
                 for i in range(len(x)):
                     pitmpX[i].append(x[i])
