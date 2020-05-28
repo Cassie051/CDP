@@ -1,4 +1,5 @@
-filepath = 'D:/Git/CDP/task4/dane/ta005.txt'
+filepath = 'dane/ta001.txt'
+
 
 with open(filepath) as fp:
     first_line = " ".join(fp.readline().split())
@@ -25,3 +26,4 @@ data = [[0 for i in range(n)] for j in range(m)]
 for i in range(n):
     for j in range(m):
         data[j][i] = tmp[i][j]
+
