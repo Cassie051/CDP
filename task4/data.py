@@ -1,4 +1,4 @@
-filepath = 'D:/Git/CDP/task4/dane/ta001.txt'
+filepath = 'D:/Git/CDP/task4/dane/ta005.txt'
 
 with open(filepath) as fp:
     first_line = " ".join(fp.readline().split())

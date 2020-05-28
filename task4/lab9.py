@@ -65,8 +65,8 @@ def Neh(NProcesses):
     while len(W) != 0 :
         j = W[len(W)-1][1]
         for i in range(len(j)):
-            pitmp[i].append(j[i])
             pi[i].append(j[i])
+        pitmp = copy.deepcopy(pi)
         for l in range(0, k):
             if k>0:
                 for i in range(len(j)):
@@ -78,7 +78,7 @@ def Neh(NProcesses):
     return Cmax(pi)
 
 
-def Select(Wx, pi, case):
+def Select(Wj, pi, case):
     if(case == 1):
         # najdluzsza operacja na sciezce krytycznej
         return "nothing"
@@ -101,13 +101,16 @@ def Select(Wx, pi, case):
             for i in range(len(pi)):
                 tmptask[i] = pi[i][j]
                 del pi[i][j]
-            tmp = Cmax(pi)
-            if elier == -2:
-                elier = tmp
-                task = copy.deepcopy(tmptask)
-            elif ref-elier < ref-tmp:
-                task = copy.deepcopy(tmptask)
-            pi = copy.deepcopy(tpi)
+            if tmptask == Wj:
+                pi = copy.deepcopy(tpi)
+            else:
+                tmp = Cmax(pi)
+                if elier == -2:
+                    elier = tmp
+                    task = copy.deepcopy(tmptask)
+                elif ref-elier < ref-tmp:
+                    task = copy.deepcopy(tmptask)
+                pi = copy.deepcopy(tpi)
         return task
 
 
@@ -130,8 +133,8 @@ def NehPlus(NProcesses):
     while len(W) != 0 :
         j = W[len(W)-1][1]
         for i in range(len(j)):
-            pitmp[i].append(j[i])
             pi[i].append(j[i])
+        pitmp = copy.deepcopy(pi)
         for l in range(0, k):
             if k>0:
                 for i in range(len(j)):
@@ -141,21 +144,18 @@ def NehPlus(NProcesses):
         del W[len(W)-1]
         flag += 1
 
-        if(flag > 0):
-            Wx = copy.deepcopy(W)
-            x = Select(Wx, pi.copy(), 4)
-            if(x != j):
-                for i in range(len(x)):
-                    pitmp[i].append(x[i])
-                    pi[i].append(x[i])
-                for l in range(0, k):
-                    if k>0:
-                        for i in range(len(x)):
-                            pitmp[i][k-l], pitmp[i][k-l-1] = pitmp[i][k-l-1], pitmp[i][k-l]
-                    if Cmax(pitmp) < Cmax(pi):
-                        pi = copy.deepcopy(pitmp)
+        if(flag > 1):
+            x = Select(j, copy.deepcopy(pi), 4)
+            pitmp = copy.deepcopy(pi)
+            for l in range(0, k):
+                if k>0:
+                    for i in range(len(x)):
+                        pitmp[i][k-l], pitmp[i][k-l-1] = pitmp[i][k-l-1], pitmp[i][k-l]
+                if Cmax(pitmp) < Cmax(pi):
+                    pi = copy.deepcopy(pitmp)
         k += 1
+    # print(pi)
     return Cmax(pi)
 
-
+print(Neh(Processes))
 print(NehPlus(Processes))
