@@ -13,8 +13,8 @@ L = int(math.sqrt(N)) #N N*N
 x = T0/1000 #T0/10000 T0/100000
 alpha = 0.97 #0,95 0,90
 Tend = 1 #0.01 #0.001 0.0001
-rm = 'i' #'l'  g' 'i'
-mm = 'a' #'i' 't' 'a'
+rm = 'l' #'l'  g' 'i'
+mm = 'i' #'i' 't' 'a'
 
 def Cmax(CProcesses):
     Cstart = 0
@@ -142,7 +142,7 @@ def SAA():
                 pi_best = pi
         iterator += 1
         #print (iterator)
-        T = reduceMethod(rm, T0, iterator)
+        T = reduceMethod(rm, T, iterator)
     return pi_best
 
-print (SAA())
+print (Cmax(SAA()))
