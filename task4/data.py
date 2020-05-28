@@ -1,5 +1,6 @@
 filepath = 'dane/ta001.txt'
 
+
 with open(filepath) as fp:
     first_line = " ".join(fp.readline().split())
     first_second = " ".join(fp.readline().split())
