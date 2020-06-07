@@ -2,26 +2,26 @@ import data
 import random
 import sys
 import math
-
+import time
 
 Processes = data.tmp.copy()
 N = data.n
 M = data.m
 
-T0 = 100 #100 10000
-L = int(math.sqrt(N)) #N N*N
-x = T0/1000 #T0/10000 T0/100000
+T0 = 100 #100 1000 10000
+L = N #int(math.sqrt(N)) #N N*N
+x = T0/100000 #T0/10000 T0/100000
 alpha = 0.97 #0,95 0,90
 Tend = 1 #0.01 #0.001 0.0001
-rm = 'l' #'l'  g' 'i'
-mm = 'i' #'i' 't' 'a'
+rm = 'g' #'l' 'g' 'i'
+mm = 't' # 's' 'i' 't' 'a'
 
 def Cmax(CProcesses):
     Cstart = 0
     Cend = 0
-    endList = [[0 for i in range(N)]  for j in range(M)]
-    startList = [[0 for i in range(N)]  for j in range(M)]
-    for i in range(0, M):
+    endList = [[0 for i in range(len(CProcesses[0]))]  for j in range(len(CProcesses))]
+    startList = [[0 for i in range(len(CProcesses[0]))]  for j in range(len(CProcesses))]
+    for i in range(0, len(CProcesses)):
         for j in range(0, len(CProcesses[0])):
             if(i == 0):
                 Cstart = Cend
@@ -35,7 +35,7 @@ def Cmax(CProcesses):
 
             startList[i][j] = Cstart
             endList[i][j] = Cend
-    return endList[M-1][N-1]
+    return endList[len(CProcesses)-1][len(CProcesses[0])-1]
 
 #ChilleraUtopia
 
@@ -145,4 +145,8 @@ def SAA():
         T = reduceMethod(rm, T, iterator)
     return pi_best
 
+start = time.time()
 print (Cmax(SAA()))
+end = time.time()
+T = end - start
+print(T)

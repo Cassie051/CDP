@@ -1,4 +1,4 @@
-filepath = 'dane/ta001.txt'
+filepath = 'dane/ta120.txt'
 
 
 with open(filepath) as fp:

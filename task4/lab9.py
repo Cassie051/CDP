@@ -1,5 +1,6 @@
 import data, sys
 import copy
+import time
 
 Processes = data.data.copy()
 N = data.n
@@ -47,7 +48,6 @@ def CNeh(CProcesses):
 
     return endList
 
-
 def Neh(NProcesses):
     k = 0
     W = []
@@ -76,7 +76,6 @@ def Neh(NProcesses):
         del W[len(W)-1]
         k += 1
     return Cmax(pi)
-
 
 def Select(Wj, pi, case):
     if(case == 1):
@@ -112,8 +111,6 @@ def Select(Wj, pi, case):
                     task = copy.deepcopy(tmptask)
                 pi = copy.deepcopy(tpi)
         return task
-
-
 
 def NehPlus(NProcesses):
     k = 0
@@ -157,5 +154,15 @@ def NehPlus(NProcesses):
     # print(pi)
     return Cmax(pi)
 
+
+start = time.time()
 print(Neh(Processes))
+end = time.time()
+T = end - start
+print(T)
+
+start = time.time()
 print(NehPlus(Processes))
+end = time.time()
+T = end - start
+print(T)
